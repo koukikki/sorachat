@@ -1,6 +1,18 @@
 
 import streamlit as st
 import openai
+from PIL import Image
+ 
+image = Image.open('favicon.png')
+st.set_page_config(
+    page_title="Sora Chat", 
+    page_icon=image, 
+    menu_items={
+         'About': """
+         # Sora Chat
+         私の飼い猫の空の生態を答えるチャットボットです。
+         """
+     })
 
 # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
