@@ -1,4 +1,4 @@
-# sorachat
+# Sora Chat
 <https://sorachat-sresrm4dfynh9kuol3xvqy.streamlit.app/>
 
 ## 概要
