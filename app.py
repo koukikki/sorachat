@@ -1,12 +1,13 @@
-
+# 以下を「app.py」に書き込み
 import streamlit as st
 import openai
+import secret_keys  # 外部ファイルにAPI keyを保存
 from PIL import Image
- 
+
 image = Image.open('favicon.png')
 st.set_page_config(
-    page_title="Sora Chat", 
-    page_icon=image, 
+    page_title="Sora Chat",
+    page_icon=image,
     menu_items={
          'About': """
          # Sora Chat
@@ -14,8 +15,7 @@ st.set_page_config(
          """
      })
 
-# Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
-openai.api_key = st.secrets.OpenAIAPI.openai_api_key
+openai.api_key = secret_keys.openai_api_key
 
 # st.session_stateを使いメッセージのやりとりを保存
 if "messages" not in st.session_state:
@@ -41,9 +41,18 @@ def communicate():
     st.session_state["user_input"] = ""  # 入力欄を消去
 
 
+# メッセージを表示するための関数
+def display_message(message):
+    if message["role"] == "assistant":
+        # アシスタントのメッセージは左寄り
+        st.markdown(f"<p style='text-align: left;'>🤖: {message['content']}</p>", unsafe_allow_html=True)
+    else:
+        # ユーザーのメッセージは右寄り
+        st.markdown(f"<p style='text-align: right;'>{message['content']} : 🙂</p>", unsafe_allow_html=True)
+
 # ユーザーインターフェイスの構築
 st.title("Sora Chat")
-st.write("私の飼い猫の空の生態を答えるチャットボットです。")
+st.write("飼い猫🐈の空の生態を答えるチャットボットです。")
 
 user_input = st.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
 
@@ -51,8 +60,4 @@ if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
     for message in reversed(messages[1:]):  # 直近のメッセージを上に
-        speaker = "🙂"
-        if message["role"]=="assistant":
-            speaker="🤖"
-
-        st.write(speaker + ": " + message["content"])
+        display_message(message)
