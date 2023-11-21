@@ -1,7 +1,6 @@
-# 以下を「app.py」に書き込み
+
 import streamlit as st
 import openai
-import secret_keys  # 外部ファイルにAPI keyを保存
 from PIL import Image
 
 image = Image.open('favicon.png')
@@ -15,7 +14,8 @@ st.set_page_config(
          """
      })
 
-openai.api_key = secret_keys.openai_api_key
+# Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
+openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
 # st.session_stateを使いメッセージのやりとりを保存
 if "messages" not in st.session_state:
