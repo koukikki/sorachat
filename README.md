@@ -9,6 +9,7 @@
 * openAI APIを使用したチャットボット
 * fine-tuningを行い独自モデルを使用
 * フレームワークはStreamlitを使用
+* ngrokでLocal環境を構築・検証
 * Streamlit Community Cloudにデプロイ
 ***
 
