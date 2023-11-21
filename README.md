@@ -8,8 +8,8 @@
 ## 使用技術
 * openAI APIを使用したチャットボット
 * fine-tuningを行い独自モデルを使用
-* フレームワークはStreamlit使用
-* Streamlit Community Cloudを使用してデプロイ
+* フレームワークはStreamlitを使用
+* Streamlit Community Cloudにデプロイ
 ***
 
 ## 課題
